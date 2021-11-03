@@ -1,4 +1,5 @@
 import 'package:alphabetscardappforkids/small_main.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'alphabets_brain.dart';
@@ -18,7 +19,7 @@ class CapitalApp extends StatelessWidget {
           title: const Text('Capital Alphabet'),
           actions: [
             IconButton(
-              icon: Image.asset('images/img2.jpg'),
+              icon: Image.asset('images/img1.jpg'),
               onPressed: () {},
             ),
           ],
@@ -80,7 +81,6 @@ class CapitalAppPage extends StatefulWidget {
 }
 
 class _CapitalAppState extends State<CapitalAppPage> {
-  List<Icon> scoreKeeper = [];
   int _counter = 10;
   Timer _timer;
   int z = 0;
@@ -100,7 +100,6 @@ class _CapitalAppState extends State<CapitalAppPage> {
           if (alphabetBrain.isFinished() == true) {
             _showMyDialog(); //Alert dialogue box
             alphabetBrain.reset();
-            scoreKeeper = [];
           }
         } else {
           _timer.cancel();
@@ -149,20 +148,12 @@ class _CapitalAppState extends State<CapitalAppPage> {
         _timer.cancel();
         _showMyDialog();
         alphabetBrain.reset();
-        scoreKeeper = [];
       } else {
         if (userPickedAnswer == correctAnswer) {
-          scoreKeeper.add(const Icon(
-            Icons.check,
-            color: Colors.green,
-          ));
+          alphabetBrain.nextQuestion();
         } else {
-          scoreKeeper.add(const Icon(
-            Icons.close,
-            color: Colors.red,
-          ));
+          alphabetBrain.previousQuestion();
         }
-        alphabetBrain.nextQuestion();
       }
     });
   }
@@ -246,9 +237,6 @@ class _CapitalAppState extends State<CapitalAppPage> {
               },
             ),
           ),
-        ),
-        Row(
-          children: scoreKeeper,
         ),
       ],
     );

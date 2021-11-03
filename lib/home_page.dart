@@ -1,4 +1,5 @@
 import 'package:alphabetscardappforkids/small_main.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Home Page'),
         actions: [
           IconButton(
-            icon: Image.asset('images/img2.jpg'),
+            icon: Image.asset('images/img1.jpg'),
             onPressed: () {},
           ),
         ],
@@ -43,10 +44,10 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Colors.white,
       body: const SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 60.0),
           child: HomePagePage(),
         ),
       ),
@@ -65,6 +66,34 @@ class HomePagePage extends StatelessWidget {
       children: [
         const SizedBox(
           height: 50,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const SizedBox(width: 10.0, height: 100.0),
+            const Text(
+              'Select Your Choice',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 40.0,
+                color: Colors.teal,
+              ),
+            ),
+            const SizedBox(width: 15.0, height: 100.0),
+            DefaultTextStyle(
+              style: const TextStyle(
+                fontSize: 35.0,
+                color: Colors.black87,
+              ),
+              child: AnimatedTextKit(
+                  repeatForever: true,
+                  isRepeatingAnimation: true,
+                  animatedTexts: [
+                    RotateAnimatedText('Of '),
+                    RotateAnimatedText('Lesson'),
+                  ]),
+            ),
+          ],
         ),
         FlatButton(
           textColor: Colors.white,

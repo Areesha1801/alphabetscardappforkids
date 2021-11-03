@@ -38,6 +38,12 @@ class SAlphabetBrain {
     }
   }
 
+  void previousQuestion() {
+    if (_alphabetNumber < _smallalphabetsBank.length - 1) {
+      _alphabetNumber--;
+    }
+  }
+
   String getQuestionText() {
     return _smallalphabetsBank[_alphabetNumber].alphabetText;
   }

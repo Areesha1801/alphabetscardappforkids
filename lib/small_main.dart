@@ -18,7 +18,7 @@ class SmallApp extends StatelessWidget {
           title: const Text('Small Alphabets'),
           actions: [
             IconButton(
-              icon: Image.asset('images/img2.jpg'),
+              icon: Image.asset('images/img1.jpg'),
               onPressed: () {},
             ),
           ],
@@ -80,7 +80,6 @@ class SmallAppPage extends StatefulWidget {
 }
 
 class _SmallAppState extends State<SmallAppPage> {
-  List<Icon> scoreKeeper = [];
   int _counter = 10;
   Timer _timer;
   int z = 0;
@@ -100,7 +99,6 @@ class _SmallAppState extends State<SmallAppPage> {
           if (salphabetBrain.isFinished() == true) {
             _showMyDialog(); //Alert dialogue box
             salphabetBrain.reset();
-            scoreKeeper = [];
           }
         } else {
           _timer.cancel();
@@ -149,20 +147,12 @@ class _SmallAppState extends State<SmallAppPage> {
         _timer.cancel();
         _showMyDialog();
         salphabetBrain.reset();
-        scoreKeeper = [];
       } else {
         if (userPickedAnswer == correctAnswer) {
-          scoreKeeper.add(const Icon(
-            Icons.check,
-            color: Colors.green,
-          ));
+          salphabetBrain.nextQuestion();
         } else {
-          scoreKeeper.add(const Icon(
-            Icons.close,
-            color: Colors.red,
-          ));
+          salphabetBrain.previousQuestion();
         }
-        salphabetBrain.nextQuestion();
       }
     });
   }
@@ -246,9 +236,6 @@ class _SmallAppState extends State<SmallAppPage> {
               },
             ),
           ),
-        ),
-        Row(
-          children: scoreKeeper,
         ),
       ],
     );
