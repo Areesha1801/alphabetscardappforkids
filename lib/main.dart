@@ -61,7 +61,7 @@ class CapitalApp extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.white,
         body: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -177,7 +177,7 @@ class _CapitalAppState extends State<CapitalAppPage> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 25.0,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                   const Text("\n"),
@@ -189,7 +189,7 @@ class _CapitalAppState extends State<CapitalAppPage> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 100.0,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                 ],
