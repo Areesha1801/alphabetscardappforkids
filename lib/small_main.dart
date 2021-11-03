@@ -1,13 +1,14 @@
-import 'package:alphabetscardappforkids/small_main.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'alphabets_brain.dart';
 import 'dart:async';
 
+import 'main.dart';
+
 AlphabetBrain alphabetBrain = AlphabetBrain();
 
-class CapitalApp extends StatelessWidget {
-  const CapitalApp({Key key}) : super(key: key);
+class SmallApp extends StatelessWidget {
+  const SmallApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CapitalApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal,
-          title: const Text('Capital Alphabet'),
+          title: const Text('Small Alphabets'),
           actions: [
             IconButton(
               icon: Image.asset('images/img2.jpg'),
@@ -64,7 +65,7 @@ class CapitalApp extends StatelessWidget {
         body: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: CapitalAppPage(),
+            child: SmallAppPage(),
           ),
         ),
       ),
@@ -72,70 +73,15 @@ class CapitalApp extends StatelessWidget {
   }
 }
 
-class CapitalAppPage extends StatefulWidget {
-  const CapitalAppPage({Key key}) : super(key: key);
+class SmallAppPage extends StatefulWidget {
+  const SmallAppPage({Key key}) : super(key: key);
 
   @override
-  _CapitalAppState createState() => _CapitalAppState();
+  _SmallAppState createState() => _SmallAppState();
 }
 
-class _CapitalAppState extends State<CapitalAppPage> {
+class _SmallAppState extends State<SmallAppPage> {
   List<Icon> scoreKeeper = [];
-  int _counter = 10;
-  Timer _timer;
-  int z = 0;
-  void _startTimer() {
-    _counter = 10;
-    if (_timer != null) {
-      _timer.cancel();
-    }
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_counter > 0) {
-          _counter--;
-        } else if (_counter == 0) {
-          alphabetBrain.nextQuestion();
-          _counter = 10;
-          c++;
-        } else if (alphabetBrain.endCheck() == 9 && _counter == 0) {
-          if (alphabetBrain.isFinished() == true) {
-            _showMyDialog(); //Alert dialogue box
-            alphabetBrain.reset();
-            scoreKeeper = [];
-          }
-        } else {
-          _timer.cancel();
-        }
-      });
-    });
-  }
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Quiz Finished'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('Hurrah!!! You have Completed Your Lesson'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = alphabetBrain.getCorrectAnswer();
