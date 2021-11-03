@@ -85,7 +85,7 @@ class _CapitalAppState extends State<CapitalAppPage> {
   Timer _timer;
   int z = 0;
   void _startTimer() {
-    _counter = 10;
+    _counter = 5;
     if (_timer != null) {
       _timer.cancel();
     }
@@ -95,9 +95,8 @@ class _CapitalAppState extends State<CapitalAppPage> {
           _counter--;
         } else if (_counter == 0) {
           alphabetBrain.nextQuestion();
-          _counter = 10;
-          c++;
-        } else if (alphabetBrain.endCheck() == 9 && _counter == 0) {
+          _counter = 5;
+        } else if (alphabetBrain.endCheck() == 25 && _counter == 0) {
           if (alphabetBrain.isFinished() == true) {
             _showMyDialog(); //Alert dialogue box
             alphabetBrain.reset();
@@ -116,7 +115,7 @@ class _CapitalAppState extends State<CapitalAppPage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Quiz Finished'),
+          title: const Text('Lesson Finished'),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
@@ -137,15 +136,18 @@ class _CapitalAppState extends State<CapitalAppPage> {
     );
   }
 
+  @override
+  void initState() {
+    _startTimer();
+    super.initState();
+  }
+
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = alphabetBrain.getCorrectAnswer();
     setState(() {
       if (alphabetBrain.isFinished() == true) {
-        Alert(
-          context: context,
-          title: 'Finshed',
-          desc: 'You\'ve reached the end of the quiz.',
-        ).show();
+        _timer.cancel();
+        _showMyDialog();
         alphabetBrain.reset();
         scoreKeeper = [];
       } else {
@@ -176,13 +178,30 @@ class _CapitalAppState extends State<CapitalAppPage> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
-              child: Text(
-                alphabetBrain.getQuestionText(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    '$_counter\n ',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text("\n"),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    alphabetBrain.getQuestionText(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 100.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -194,13 +213,14 @@ class _CapitalAppState extends State<CapitalAppPage> {
               textColor: Colors.white,
               color: Colors.green,
               child: const Text(
-                'True',
+                'Forward',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
               onPressed: () {
+                _startTimer();
                 checkAnswer(true);
                 //The user picked true.
               },
@@ -213,13 +233,14 @@ class _CapitalAppState extends State<CapitalAppPage> {
             child: FlatButton(
               color: Colors.red,
               child: const Text(
-                'False',
+                'Backward',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
                 ),
               ),
               onPressed: () {
+                _startTimer();
                 checkAnswer(false);
                 //The user picked false.
               },
