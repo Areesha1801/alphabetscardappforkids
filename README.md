@@ -1,3 +1,3 @@
 # alphabetscardappforkids
-![gif1](https://user-images.githubusercontent.com/91142792/140015571-37b984d7-78e7-4ed0-9d7e-ef57a2b13441.gif)
+![gif2](https://user-images.githubusercontent.com/91142792/140017763-4fc6342b-b6c6-4687-8e22-f67eb2e176ec.gif)
  
