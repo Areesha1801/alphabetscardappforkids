@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Home Page'),
         actions: [
           IconButton(
-            icon: Image.asset('images/img1.jpg'),
+            icon: Image.asset('images/img2.jpg'),
             onPressed: () {},
           ),
         ],
